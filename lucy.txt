@@ -1,0 +1,205 @@
+26. 
+
+// Função exibir o menu e receber as opções do usuário
+function menu() {
+    let continuar = true;
+
+    while (continuar) {
+        console.log("\nEscolha uma opção:");
+        console.log("1 - Calcular idade");
+        console.log("2 - Calcular dias vividos");
+        console.log("3 - Determinar signo");
+        console.log("4 - Determinar século de nascimento");
+        console.log("5 - Determinar estação do ano de nascimento");
+        console.log("6 - Sair");
+
+        let opcao = parseInt(prompt("Digite o número da opção desejada:"));
+
+        switch (opcao) {
+            case 1:
+                calcularIdade();
+                break;
+            case 2:
+                calcularDiasVividos();
+                break;
+            case 3:
+                determinarSigno();
+                break;
+            case 4:
+                determinarSeculo();
+                break;
+            case 5:
+                determinarEstacao();
+                break;
+            case 6:
+                continuar = false;
+                console.log("Saindo do programa...");
+                break;
+            default:
+                console.log("Opção inválida. Tente novamente.");
+        }
+    }
+}
+
+// Função calcular a idade
+function calcularIdade() {
+    const { nascimento, atual } = obterDatas();
+    const idade = atual.getFullYear() - nascimento.getFullYear();
+    console.log(`A pessoa tem ${idade} anos.`);
+}
+
+// função calcular os dias vividos
+function calcularDiasVividos() {
+    const { nascimento, atual } = obterDatas();
+    const diasVividos = Math.floor((atual - nascimento) / (1000 * 60 * 60 * 24));
+    console.log(`A pessoa já viveu aproximadamente ${diasVividos} dias.`);
+}
+
+// Função para determinar o signo
+function determinarSigno() {
+    const nascimento = obterDataNascimento();
+    const mes = nascimento.getMonth() + 1;
+    const dia = nascimento.getDate();
+
+    let signo = "";
+
+    if ((mes === 3 && dia >= 21) || (mes === 4 && dia <= 19)) signo = "Áries";
+    else if ((mes === 4 && dia >= 20) || (mes === 5 && dia <= 20)) signo = "Touro";
+    // [Adicione os demais signos aqui]
+    else signo = "Signo não determinado";
+
+    console.log(`O signo da pessoa é: ${signo}`);
+}
+
+// Função para determinar o século
+function determinarSeculo() {
+    const nascimento = obterDataNascimento();
+    const ano = nascimento.getFullYear();
+    const seculo = Math.ceil(ano / 100);
+    console.log(`A pessoa nasceu no século ${seculo}.`);
+}
+
+// Função determinar a estação do ano
+function determinarEstacao() {
+    const nascimento = obterDataNascimento();
+    const mes = nascimento.getMonth() + 1;
+    const dia = nascimento.getDate();
+
+    let estacao = "";
+
+    if ((mes === 12 && dia >= 21) || mes === 1 || mes === 2 || (mes === 3 && dia < 21))
+        estacao = "Verão";
+    else if ((mes === 3 && dia >= 21) || mes === 4 || mes === 5 || (mes === 6 && dia < 21))
+        estacao = "Outono";
+    else if ((mes === 6 && dia >= 21) || mes === 7 || mes === 8 || (mes === 9 && dia < 23))
+        estacao = "Inverno";
+    else
+        estacao = "Primavera";
+
+    console.log(`A pessoa nasceu no ${estacao}.`);
+}
+
+// Função para pedir as datas do usuário
+function obterDatas() {
+    const nascimento = obterDataNascimento();
+    const atual = new Date(prompt("Digite a data atual (YYYY-MM-DD):"));
+    return { nascimento, atual };
+}
+
+// Função para pedir a data de nascimento
+function obterDataNascimento() {
+    return new Date(prompt("Digite a data de nascimento (YYYY-MM-DD):"));
+}
+
+// Iniciar o programa
+menu();
+
+
+30. 
+
+// Função principal para exibir o menu e receber as opções do usuário
+function menu() {
+    let continuar = true;
+
+    while (continuar) {
+        console.log("\nEscolha uma opção:");
+        console.log("1 - Verificar se é uma vogal");
+        console.log("2 - Verificar se é uma consoante");
+        console.log("3 - Verificar se é outro caractere");
+        console.log("4 - Sair");
+
+        let opcao = parseInt(prompt("Digite o número da opção desejada:"));
+
+        switch (opcao) {
+            case 1:
+                verificarVogal();
+                break;
+            case 2:
+                verificarConsoante();
+                break;
+            case 3:
+                verificarOutro();
+                break;
+            case 4:
+                continuar = false;
+                console.log("Saindo do programa...");
+                break;
+            default:
+                console.log("Opção inválida. Tente novamente.");
+        }
+    }
+}
+
+// função para verificar se é uma vogal
+function verificarVogal() {
+    const caractere = obterCaractere();
+    if (isVogal(caractere)) {
+        console.log(`O caractere '${caractere}' é uma vogal.`);
+    } else {
+        console.log(`O caractere '${caractere}' não é uma vogal.`);
+    }
+}
+
+// Função para verificar se é uma consoante
+function verificarConsoante() {
+    const caractere = obterCaractere();
+    if (isConsoante(caractere)) {
+        console.log(`O caractere '${caractere}' é uma consoante.`);
+    } else {
+        console.log(`O caractere '${caractere}' não é uma consoante.`);
+    }
+}
+
+// Função para verificar se é outro caractere
+function verificarOutro() {
+    const caractere = obterCaractere();
+    if (!isVogal(caractere) && !isConsoante(caractere)) {
+        console.log(`O caractere '${caractere}' é outro tipo de caractere.`);
+    } else {
+        console.log(`O caractere '${caractere}' não é outro tipo de caractere.`);
+    }
+}
+
+// Função auxiliar para verificar se é vogal
+function isVogal(c) {
+    const vogais = ['a', 'e', 'i', 'o', 'u'];
+    return vogais.includes(c.toLowerCase());
+}
+
+// Função auxiliar para verificar se é consoante
+function isConsoante(c) {
+    const consoantes = 'bcdfghjklmnpqrstvwxyz';
+    return consoantes.includes(c.toLowerCase());
+}
+
+// Função para obter o caractere do usuário
+function obterCaractere() {
+    let caractere = prompt("Digite um caractere:");
+    while (!caractere || caractere.length !== 1) {
+        caractere = prompt("Entrada inválida. Digite apenas um caractere:");
+    }
+    return caractere;
+}
+
+// Iniciar o programa
+menu();
